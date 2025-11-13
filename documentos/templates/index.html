@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDF da Cintia Merge - Interface Web</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="header-content">
+                <h1><i class="fas fa-file-pdf"></i> PDF da Cintia Merge</h1>
+                <p>Junte imagens e PDFs em um único documento com drag-and-drop</p>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <!-- Seção de Upload -->
+            <section class="upload-section">
+                <div class="upload-area" id="uploadArea">
+                    <div class="upload-content">
+                        <i class="fas fa-cloud-upload-alt upload-icon"></i>
+                        <h3>Arraste arquivos aqui ou clique para selecionar</h3>
+                        <p>Suporta: JPG, PNG, BMP, TIFF, GIF, PDF</p>
+                        <p class="file-limit">Máximo: 50MB por arquivo</p>
+                        <input type="file" id="fileInput" multiple accept=".jpg,.jpeg,.png,.bmp,.tiff,.tif,.gif,.pdf,application/pdf,image/*">
+                        <button class="btn btn-primary" id="selectFilesBtn">
+                            <i class="fas fa-plus"></i> Selecionar Arquivos
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Lista de Arquivos -->
+            <section class="files-section" id="filesSection" style="display: none;">
+                <div class="section-header">
+                    <h2><i class="fas fa-list"></i> Arquivos Selecionados</h2>
+                    <div class="section-actions">
+                        <button class="btn btn-secondary" id="clearBtn">
+                            <i class="fas fa-trash"></i> Limpar Tudo
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="drag-info">
+                    <i class="fas fa-info-circle"></i>
+                    Arraste os arquivos para reorganizar a ordem no PDF final
+                </div>
+                
+                <div class="save-info" style="display: none;" id="saveInfo">
+                    <i class="fas fa-save"></i>
+                    <span>Arquivos salvos automaticamente - não serão perdidos ao recarregar</span>
+                </div>
+
+                <div class="files-list" id="filesList">
+                    <!-- Arquivos serão inseridos aqui dinamicamente -->
+                </div>
+            </section>
+
+            <!-- Seção de Configuração -->
+            <section class="config-section" id="configSection" style="display: none;">
+                <div class="section-header">
+                    <h2><i class="fas fa-cog"></i> Configurações</h2>
+                </div>
+                
+                <div class="config-form">
+                    <div class="form-group">
+                        <label for="outputName">Nome do arquivo PDF:</label>
+                        <input type="text" id="outputName" placeholder="documento_final" value="documento_final">
+                        <small>.pdf será adicionado automaticamente</small>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Seção de Processamento -->
+            <section class="process-section" id="processSection" style="display: none;">
+                <div class="process-actions">
+                    <button class="btn btn-success btn-large" id="generateBtn">
+                        <i class="fas fa-file-pdf"></i> Gerar PDF
+                    </button>
+                </div>
+                
+                <div class="progress-container" id="progressContainer" style="display: none;">
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+                    <div class="progress-text" id="progressText">Processando...</div>
+                </div>
+
+                <div class="result-container" id="resultContainer" style="display: none;">
+                    <!-- Resultado será mostrado aqui -->
+                </div>
+            </section>
+        </main>
+
+        <!-- Modal de Erro -->
+        <div class="modal" id="errorModal" style="display: none;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3><i class="fas fa-exclamation-triangle"></i> Erro</h3>
+                    <button class="modal-close" onclick="closeModal('errorModal')">&times;</button>
+                </div>
+                <div class="modal-body" id="errorMessage">
+                    <!-- Mensagem de erro -->
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" onclick="closeModal('errorModal')">Fechar</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal de Sucesso -->
+        <div class="modal" id="successModal" style="display: none;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3><i class="fas fa-check-circle"></i> Sucesso</h3>
+                    <button class="modal-close" onclick="closeModal('successModal')">&times;</button>
+                </div>
+                <div class="modal-body" id="successMessage">
+                    <!-- Mensagem de sucesso -->
+                </div>
+                <div class="modal-footer" id="successActions">
+                    <!-- Ações de sucesso (download, etc.) -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Loading Overlay -->
+        <div class="loading-overlay" id="loadingOverlay" style="display: none;">
+            <div class="loading-content">
+                <div class="spinner"></div>
+                <p>Processando arquivos...</p>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p>&copy; 2025 PDF da Cintia Merge - Desenvolvido com ❤️</p>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.0/Sortable.min.js"></script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

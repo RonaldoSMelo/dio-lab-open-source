@@ -1,0 +1,20 @@
+# Dependências para o PDF Merger
+# Script para juntar imagens e PDFs em um único arquivo PDF
+
+# Framework Web
+Flask>=2.3.0
+
+# Manipulação de imagens
+Pillow>=10.0.0
+
+# Manipulação de PDFs
+PyPDF2>=3.0.0
+
+# Conversão de imagens para PDF
+img2pdf>=0.4.4
+
+# Utilitários para Flask
+Werkzeug>=2.3.0
+
+# Criptografia para PDFs protegidos
+PyCryptodome>=3.20.0
