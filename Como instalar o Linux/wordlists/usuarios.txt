@@ -1,0 +1,15 @@
+admin
+root
+ftp
+user
+msfadmin
+anonymous
+postgres
+service
+test
+guest
+operator
+nobody
+www-data
+daemon
+sys
